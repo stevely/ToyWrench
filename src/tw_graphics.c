@@ -189,7 +189,7 @@ static int draw_line( unsigned int x0, unsigned int y0,
 static int draw_sprite( int texture, int x, int y ) {
     SDL_Rect dest;
     if( initialized ) {
-        if( texture < texture_list_size ) {
+        if( (unsigned int)texture < texture_list_size ) {
             dest.x = x;
             dest.y = y;
             dest.w = 0; /* width and height are ignored */
@@ -356,7 +356,7 @@ int lua_drawTexture( lua_State *L ) {
             x = lua_tonumber(L, 2);
             y = lua_tonumber(L, 3);
     }
-    if( texture < texture_list_size ) {
+    if( (unsigned int)texture < texture_list_size ) {
         draw_sprite(texture, x, y);
         lua_pop(L, lua_gettop(L)); /* clear stack */
         return 0;
